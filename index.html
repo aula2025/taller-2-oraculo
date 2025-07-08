@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Taller 2 – El Primer Oráculo</title>
+    <style>
+        body {
+            font-family:'Open Sans', sans-serif;
+            background-color:#f9f9f9;
+            color:#333;
+            line-height: 1.6;
+            padding: 30px;
+            margin: 0;
+        }
+        .contenedor-taller {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1, h2 {
+            color:#004080;
+            text-align: center;
+        }
+        .lectura {
+            background-color:#e8f4ff;
+            border-left: 4px solid #4A90E2;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 8px;
+            font-style: italic;
+        }
+        .pregunta {
+            margin-bottom: 20px;
+            background-color:#fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color:#333;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        button {
+            background-color:#FFD700;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color:#e6c200;
+        }
+        .mensaje-final {
+            display: none;
+            margin-top: 30px;
+            background:#fff3cd;
+            color:#856404;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        .boton-opciones {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .boton-opciones button {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor-taller">
+
+    <!-- Campo de nombre -->
+    <h2>Capítulo 2 – El Primer Oráculo</h2>
+    <center>
+        <img src="https://i.ibb.co/5WLQR5FF/0001-1-a-digital-painting.jpg " alt="pirata" border="0" width="300">
+        <p style="font-style:italic;">¿Podrán Matea y Leo a detener a los piratas?</p>
+    </center>
+
+    <!-- Historia -->
+    <div class="lectura">
+        <p><strong>Pasaron 30 minutos caminando</strong> y se toparon frente a una puerta gigante de madera.</p>
+        <p><strong>El Capitán dice al Conejo:</strong> “¡Cómo pasamos sin romperla!”</p>
+        <p><strong>De repente, el Oráculo habló:</strong> “Si quieres pasar, responde esta pregunta:
+        ‘Capitán, tienes 100 monedas de oro. Si el viento te quita 37 y el agua 28... ¿cuántas te quedan?’”</p>
+        <p><strong>El Capitán ignorante titubeó:</strong> “¡Yo digo que son 45!”</p>
+        <p><strong>Leo, desde lo alto de un árbol:</strong> “No, fíjate bien...”</p>
+        <p><strong>Matea susurró:</strong> “Es 35...”
+        Y uno de los piratas escuchó la respuesta y se la dijo al Capitán.</p>
+        <p><strong>Oráculo:</strong> “Bien hecho... ¡Pueden pasar!</p>
+        <p> El Capitán le dice al pirata que le ayudó: ¡Por tu ayuda, te doy el triple de monedas que ofrecí.”</p>
+        <p>Siguieron caminando y <strong>muchas aves volaban sobre ellos</strong>, gritando que se fueran.
+        El Capitán organizó a sus hombres y capturó a la mitad de ellas. Eran 12 cuervos negros.</p>
+        <p><strong>El Capitán, con cara de hambre:</strong> “¡Excelente! Uno para cada uno después de enterrar el tesoro.
+        ¡Usted, Conejo, se servirá un festín de zanahorias!”</p>
+        <p>Y continuaron caminando y cantando bajo un sol intenso.</p>
+        <p>Después de 45 minutos más de caminata, vieron un gran río bloqueando el paso.</p>
+    </div>
+
+    <!-- Campo de nombre -->
+    <div style="margin-bottom:20px;">
+        <label for="nombre"><strong>¿Cómo te llamas?</strong></label><br>
+        <input type="text" id="nombre" placeholder="Tu nombre aquí"/>
+    </div>
+
+    <!-- Botón generar -->
+    <button onclick="generarPreguntas()">🧠 Generar mis 5 retos</button>
+
+    <!-- Contenedor de preguntas -->
+    <div id="contenedor-preguntas"></div>
+
+    <!-- Botón evaluar -->
+    <button onclick="evaluarExamen()" id="btn-evaluar" style="display:none;">✅ Evaluar mi prueba</button>
+
+    <!-- Resultado final -->
+    <div class="mensaje-final" id="resultado"></div>
+
+    <!-- Botones adicionales -->
+    <div class="boton-opciones" id="botonera">
+        <button onclick="reintentar()">🔄 Reintentar</button>
+        <button onclick="salir()">🚪 Salir</button>
+        <button onclick="irAlSiguiente()" id="btn-siguiente">➡️ Ir al Capítulo 3</button>
+    </div>
+
+</div>
+
+<script>
+    const bancoPreguntas = [
+        { tipo:"num", texto:"¿Cuántas monedas le quedan al Capitán?", respuestaClave: 35 },
+        { tipo:"num", texto:"¿Cuántas monedas recibe el pirata que ayudó al Capitán?", respuestaClave: 9 },
+        { tipo:"num", texto:"¿Cuántas aves gritaban en total?", respuestaClave: 24 },
+        { tipo:"vf", texto:"¿Es posible comerse 12 cuervos si solo hay 10 piratas?", correcta: false },
+        { tipo:"num", texto:"¿Cuánto tiempo han caminado en total?", respuestaClave: 75 },
+        { tipo:"num", texto:"¿Cuántas monedas demás recibió el pirata que ayudo aresponder al Capitán?", respuestaClave: 6 },
+        { tipo:"sel", texto:"¿Quién susurró la respuesta correcta?", opciones:["Leo","Matea","Tomás"], correcta:"opcion2" },
+        { tipo:"sel", texto:"¿Qué tipo de ave gritaba?", opciones:["Águila","Cuervo","Paloma"], correcta:"opcion2" },
+        { tipo:"sel", texto:"¿Dónde apareció el Oráculo?", opciones:["Puerta de madera","Río","Bosque"], correcta:"opcion1" },
+        { tipo:"sel", texto:"¿Quién quitó las monedas al Capitán?", opciones:["Viento y Agua","Fuego y Tierra","Agua y Fuego"], correcta:"opcion1" },
+        { tipo:"sel", texto:"¿En qué tipo de día estaban caminando?", opciones:["Caluroso","Nublado","Lluvioso"], correcta:"opcion1" }
+    ];
+
+    let preguntasSeleccionadas = [];
+    let nombreEstudiante = "";
+
+    function generarPreguntas() {
+        // Validar nombre
+        nombreEstudiante = document.getElementById("nombre").value.trim();
+        if (!nombreEstudiante) {
+            alert("Por favor, escribe tu nombre antes de continuar.");
+            return;
+        }
+
+        // Limpiar contenedor
+        const contenedor = document.getElementById("contenedor-preguntas");
+        contenedor.innerHTML = "";
+
+        // Seleccionar 5 preguntas aleatorias
+        const indicesUsados = [];
+        preguntasSeleccionadas = [];
+
+        while (preguntasSeleccionadas.length < 5) {
+            const index = Math.floor(Math.random() * bancoPreguntas.length);
+            if (!indicesUsados.includes(index)) {
+                indicesUsados.push(index);
+                preguntasSeleccionadas.push(bancoPreguntas[index]);
+            }
+        }
+
+        // Generar preguntas
+        preguntasSeleccionadas.forEach((pregunta, i) => {
+            const div = document.createElement("div");
+            div.className = "pregunta";
+            const label = document.createElement("label");
+            label.innerHTML = `<strong>${i+1}. ${pregunta.texto}</strong>`;
+            div.appendChild(label);
+
+            if (pregunta.tipo === "num") {
+                const input = document.createElement("input");
+                input.type = "number";
+                input.id = "pregunta" + i + "-input";
+                input.style.width = "100%";
+                input.style.padding = "10px";
+                input.placeholder = "Escribe tu respuesta";
+                div.appendChild(input);
+            } else if (pregunta.tipo === "vf") {
+                div.innerHTML += `
+                    <div class="radio-group" style="margin-top:10px;">
+                        <label><input type="radio" name="pregunta${i}" value="true"> Verdadero</label>
+                        <label><input type="radio" name="pregunta${i}" value="false"> Falso</label>
+                    </div>`;
+            } else if (pregunta.tipo === "sel") {
+                const select = document.createElement("select");
+                select.id = "pregunta" + i + "-select";
+                select.style.width = "100%";
+                select.style.padding = "10px";
+
+                pregunta.opciones.forEach((opcion, j) => {
+                    const option = document.createElement("option");
+                    option.value = "opcion" + (j + 1);
+                    option.textContent = opcion;
+                    select.appendChild(option);
+                });
+
+                div.appendChild(document.createElement("br"));
+                div.appendChild(select);
+            }
+
+            contenedor.appendChild(div);
+        });
+
+        // Mostrar botón de evaluación
+        document.getElementById("btn-evaluar").style.display = "inline-block";
+    }
+
+    function evaluarExamen() {
+        const resultadoDiv = document.getElementById("resultado");
+        const botonera = document.getElementById("botonera");
+        let aciertos = 0;
+
+        preguntasSeleccionadas.forEach((pregunta, i) => {
+            const id = "pregunta" + i;
+            if (pregunta.tipo === "num") {
+                const valor = parseInt(document.getElementById(id + "-input").value);
+                if (!isNaN(valor) && valor === pregunta.respuestaClave) {
+                    aciertos++;
+                }
+            } else if (pregunta.tipo === "vf") {
+                const radio = document.querySelector('input[name="pregunta' + i + '"]:checked');
+                if (radio && radio.value === pregunta.correcta.toString()) {
+                    aciertos++;
+                }
+            } else if (pregunta.tipo === "sel") {
+                const valor = document.getElementById(id + "-select").value;
+                if (valor === pregunta.correcta) {
+                    aciertos++;
+                }
+            }
+        });
+
+        // Mostrar resultado
+        const porcentaje = (aciertos / 5) * 100;
+
+        if (porcentaje >= 80) {
+            resultadoDiv.innerHTML = `¡Excelente trabajo, ${nombreEstudiante}! Acertaste ${aciertos} de 5 preguntas.<br><br>Has superado este reto. Estás listo/a para seguir adelante.`;
+            botonera.style.display = "block";
+            document.querySelectorAll("#botonera button:not(#btn-siguiente)").forEach(btn => btn.style.display = "none");
+        } else {
+            resultadoDiv.innerHTML = `Lo siento, ${nombreEstudiante}, lograste ${aciertos} aciertos de 5.<br><br>No te preocupes, sigue practicando. ¿Quieres intentarlo otra vez?`;
+            botonera.style.display = "block";
+            document.getElementById("btn-siguiente").style.display = "none";
+            document.querySelectorAll("#botonera button:not(#btn-siguiente)").forEach(btn => btn.style.display = "inline-block");
+        }
+
+        resultadoDiv.style.display = "block";
+    }
+
+    function reintentar() {
+        location.reload();
+    }
+
+    function salir() {
+        // Reiniciar página completa
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        location.reload();
+    }
+
+    function irAlSiguiente() {
+        const nombre = encodeURIComponent(nombreEstudiante);
+        window.location.href = "/avances/nivel-2/capitulo-3?nombre=" + nombre;
+    }
+</script>
+
+</body>
+</html>
